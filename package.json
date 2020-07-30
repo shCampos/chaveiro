@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/shCampos/colecionador/issues"
   },
-  "homepage": "https://github.com/shCampos/colecionador#readme"
+  "homepage": "https://github.com/shCampos/colecionador#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
