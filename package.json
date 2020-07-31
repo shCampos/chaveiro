@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/shCampos/colecionador#readme",
   "dependencies": {
+    "axios": "^0.19.2",
     "readline-sync": "^1.4.10"
   }
 }
