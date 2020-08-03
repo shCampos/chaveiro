@@ -1,13 +1,9 @@
-require('dotenv').config()
+const searchRobots = {
+  mycobank: require('./robots/search-robots/mycobank.js'),
+}
 
 function robot(content) {  
-  content.speciesNameList.forEach(el => {
-    
-  })
-
-  async function getPaperForSpecie(specie) {
-    await axios.get()
-  }
+  content.searchParams.kingdom=='Fungi'?mycobank(content):null
 }
 
 module.exports = robot
