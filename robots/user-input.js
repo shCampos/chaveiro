@@ -1,8 +1,7 @@
 const readline  = require('readline-sync')
 
 function userInput(content) {
-  content.kingdon = 'Fungi'
-  //content.kingdon = askAndReturnKingdon()
+  content.searchParams.kingdon = askAndReturnKingdon()
   function askAndReturnKingdon() {
     const kingdons = ['Fungi', 'Plantae']
     const selectedKingdonIndex = readline.keyInSelect(kingdons, 'Choose the Kingdon: ')
@@ -10,14 +9,12 @@ function userInput(content) {
     return selectedKingdon
   }
   
-  content.family = 'Amanitaceae'
-  //content.family = askAndReturnFamily()
+  content.searchParams.family = askAndReturnFamily()
   function askAndReturnFamily() {
     return readline.question('Type the Family: ')
   }
 
-  content.genus = 'Amanita'
-  //content.genus = askAndReturnGenus()
+  content.searchParams.genus = askAndReturnGenus()
   function askAndReturnGenus() {
     return readline.question('Type the Genus: ')
   }

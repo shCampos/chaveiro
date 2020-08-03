@@ -1,14 +1,24 @@
-const robots = {
+const Promise = require('bluebird')
+
+const robots = {  
   userInput: require('./robots/user-input.js'),
-  list: require('./robots/list.js')
+  list: require('./robots/list.js'),
+  search: require('./robots/search-robots/index.js')
 }
 
-function begin() {
-  const content = {}
-  
-  robots.userInput(content)
-  console.log(content)
-  robots.list(content)
-}
+const content = {}
 
-begin()
+Promise.resolve(teste())
+  //.tap(robots.list(content))
+  .tap(robots.search(content))
+
+function teste(){
+  content.searchParams = {
+    kingdon: 'Fungi',
+    family: 'Amanitaceae',
+    genus: 'Amanita',
+  }
+  content.species = [{
+    scientificName: 'Amanita muscaria'
+  }]
+}
