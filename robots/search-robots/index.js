@@ -6,7 +6,7 @@ const searchRobots = {
 
 function robot(content) {
   content.species.forEach(el => {
-    checkSpecieInDb(el.scientificName)&&
+    !checkSpecieInDb(el.scientificName)&&
     content.searchParams.kingdon=='Fungi'?searchRobots.mycobank(content):searchRobots.core(content)
   })
 }
