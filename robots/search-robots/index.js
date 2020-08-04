@@ -1,9 +1,10 @@
 const searchRobots = {
-  mycobank: require('./robots/search-robots/mycobank.js'),
+  mycobank: require('./mycobank.js'),
+  core: require('./core.js')
 }
 
 function robot(content) {  
-  content.searchParams.kingdom=='Fungi'?mycobank(content):null
+  content.searchParams.kingdon=='Fungi'?searchRobots.mycobank(content):searchRobots.core(content)
 }
 
 module.exports = robot
