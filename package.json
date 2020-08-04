@@ -20,10 +20,9 @@
     "axios": "^0.19.2",
     "bluebird": "^3.7.2",
     "dotenv": "^8.2.0",
+    "firebase": "^7.17.1",
     "readline-sync": "^1.4.10",
-    "selenium-webdriver": "^4.0.0-alpha.7",
-    "soap": "^0.32.0",
-    "webdriverio": "^6.3.6"
+    "selenium-webdriver": "^4.0.0-alpha.7"
   },
   "devDependencies": {
     "chromedriver": "^84.0.1"

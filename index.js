@@ -1,6 +1,6 @@
 const Promise = require('bluebird')
 
-const robots = {  
+const robots = {
   userInput: require('./robots/user-input.js'),
   list: require('./robots/list.js'),
   search: require('./robots/search-robots/index.js')
