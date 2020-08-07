@@ -1,18 +1,18 @@
-const Promise = require('bluebird')
 const { Builder, By, Key, until, Wait } = require('selenium-webdriver')
 const chrome = require('selenium-webdriver/chrome')
 const chromedriver = require('chromedriver')
+const { writeSpecie } = require('../../firebase.js')
 
-async function robot(content) {
+async function robot(specie) {
   chrome.setDefaultService(new chrome.ServiceBuilder(chromedriver.path).build())
-  let formatedSpecieName, infoPageLink, descriptionPageLink 
+  let formatedSpecieName, infoPageLink, descriptionPageLink
 
   await searchPageHander()
   await infoPageHandler()
   await descriptionPageHandler()
-
+  
   async function searchPageHander() {
-    formatedSpecieName = scientificNameFormat(content.species[0].scientificName)
+    formatedSpecieName = scientificNameFormat(specie.scientificName)
     let searchPageDriver = new Builder().forBrowser('chrome').build()
     console.log(`[search-robot [MycoBank] | ${formatedSpecieName}] Building browser...`)
     try {
@@ -37,6 +37,7 @@ async function robot(content) {
       await searchPageDriver.quit()
     }
   }
+
   async function infoPageHandler() {
     let infoPageDriver = new Builder().forBrowser('chrome').build()
     try {
@@ -52,7 +53,6 @@ async function robot(content) {
       })
     } catch(err) {
       console.log(`[search-robot [MycoBank] | ${formatedSpecieName}] Description doesn't found...`)
-      console.log(`[search-robot | ${formatedSpecieName}] Starting Core research`)
       console.log(err)
     } finally {
       await infoPageDriver.quit()
@@ -61,19 +61,20 @@ async function robot(content) {
 
   async function descriptionPageHandler() {
     let descriptionPageDriver = new Builder().forBrowser('chrome').build()
-    try {
-      console.log(`[search-robot [MycoBank] | ${formatedSpecieName}] Getting description...`) 
+    try {      
       await descriptionPageDriver.get(descriptionPageLink)
-      .then(()=>console.log(`[search-robot [MycoBank] | ${formatedSpecieName}] Filtering description and extracting features...`))
+      .then(() => console.log(`[search-robot [MycoBank] | ${formatedSpecieName}] Getting description...`))
+      .catch((err) => console.log(`[search-robot [MycoBank] | ${formatedSpecieName}] Error in getting description...`))
       let descriptionTextElement = await descriptionPageDriver.findElement(By.id('ctl00_Main_RG_Detail_ctl00__3'))
       .findElement(By.className('RightColCSS'))
-      let descriptionText = await descriptionTextElement.getText()
-      console.log(descriptionText)
+      specie.descriptionDirty = await descriptionTextElement.getText()
+      specie.descriptionDirty?writeSpecie(specie):console.log(`[search-robot [MycoBank] | ${formatedSpecieName}] Error in getting description...`)
     } catch(err) {
+      console.log(`[search-robot [MycoBank] | ${formatedSpecieName}] Error in getting description...`)
       console.log(err)
-    } /* finally {
+    } finally {
       await descriptionPageDriver.quit()
-    } */
+    }
   }
 
   function scientificNameFormat(scientificName){

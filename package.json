@@ -21,7 +21,7 @@
     "bluebird": "^3.7.2",
     "dotenv": "^8.2.0",
     "firebase": "^7.17.1",
-    "readline-sync": "^1.4.10",
+    "prompts": "^2.3.2",
     "selenium-webdriver": "^4.0.0-alpha.7"
   },
   "devDependencies": {

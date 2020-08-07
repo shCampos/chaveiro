@@ -1,4 +1,5 @@
-const Promise = require('bluebird')
+require('dotenv').config()
+const { Promise } = require('bluebird')
 
 const robots = {
   userInput: require('./robots/user-input.js'),
@@ -8,10 +9,17 @@ const robots = {
 
 const content = {}
 
-Promise.resolve(teste())
-  //.tap(robots.list(content))
-  .tap(robots.search(content))
-
+robots.userInput(content)
+  .then(async () => {
+    await robots.list(content)
+    await robots.search(content)
+  })
+/* Promise.resolve()
+  .tap(robots.userInput(content))
+  .tap(robots.list(content)) */
+/* Promise.resolve(robots.userInput(content))
+  .tap(robots.list(content))
+ */
 function teste(){
   content.searchParams = {
     kingdon: 'Fungi',
@@ -21,4 +29,5 @@ function teste(){
   content.species = [{
     scientificName: 'Amanita muscaria'
   }]
+  console.log(content)
 }
