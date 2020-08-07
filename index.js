@@ -1,5 +1,4 @@
 require('dotenv').config()
-const { Promise } = require('bluebird')
 
 const robots = {
   userInput: require('./robots/user-input.js'),
@@ -14,12 +13,7 @@ robots.userInput(content)
     await robots.list(content)
     await robots.search(content)
   })
-/* Promise.resolve()
-  .tap(robots.userInput(content))
-  .tap(robots.list(content)) */
-/* Promise.resolve(robots.userInput(content))
-  .tap(robots.list(content))
- */
+
 function teste(){
   content.searchParams = {
     kingdon: 'Fungi',
